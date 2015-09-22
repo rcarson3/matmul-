@@ -1,0 +1,10 @@
+Group 23's Review of Group 24's initial report
+
+1. First off the report looked fine. One note we'd have to say is that when you make the first set of plots just be sure to note that you are using only the basic optimization options during compilation. Also, the table at the end might not be needed. A simple graph could just as easily get the point across. It looks like you spent a fair amount of time looking into how blocking and copy optimization affect the results of your calculations. You also mentioned a couple of areas for improvement like a multiple blocking scheme and faster matrix multiplication methods.
+
+2. A couple areas that you could look into for improvements:
+	A.) You might find the restrict keyword in C to be useful. It tells the compiler that a pointers for a function argument will not be located at the same memory address as another pointer being passed into the function.
+	B.) When you are calculating the appropriate block size you should be able to get away with only using 2 matrices, since the other matrix should only need to use one element at a time for the inner loop.
+	C.) The block sizes could be using non power of 2 values if you were to copy that data over to another matrix that is a power of 2 but is padded 0 for cells not used in the array.
+	 D.) You'll really want to look into the tuning, interprocedural options, and vectorization options that the intel compiler offers. They can really provide a significant performance boost. Also, our group found that we could also use some of the GNU compiler options with the intel ones like ftree-vectorize and funroll-loop. One last thing be wary of using the fast option. It can lead to poorer performance of your code. We found this out when we were trying it out in our code.
+	 E.) If you have time also look into taking advantage of the AVX2 instruction set. The documents/tutorials that Intel provides online seem to suggest that this could be an easy way to get a nice performance boost out of your code.
