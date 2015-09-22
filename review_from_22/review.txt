@@ -1,0 +1,29 @@
+This is Group 22, reviewing the matmul project submitted by Group 23.
+
+1. Your writeup looks really nice! Also, it looks like you guys did a lot of experimentation
+   and played with the compiler flags a lot. So good work on that! You guys also experimented
+   with different block sizes and found some that worked better than others. You also 
+   mention some possible improvements that could be made in order to make your code even
+   better! I also liked how you combined C with Fortran! So, all in all, pretty good!
+
+2. Some improvements that could be made for your code include the following:
+        a. Copy optimization. So you could initially copy your matrix so that matrix A
+           could be in row major order (for example), and matrix B to be in column major
+           order (for example -- I'm not sure what the best copy optimization would be;
+           you'll have to play with it). With this scheme, you could have a stride
+           of 1 when performing an inner product, if you were making your kernel
+           perform an inner product. 
+                -- While you're copying, you can also pad your matrices with 0s so that
+                   you have an even number of blocks instead of having one block at the
+                   end that is slightly smaller than the rest.
+
+        b. You guys also mentioned leveraging the different cache sizes, so a multi-level
+           blocking operation could be done. I'd be curious to see the effect of this. We
+           actually wanted to do this, but got lazy, soooooo.
+
+        c. Vectorize, vectorize, vectorize! Look up the Intel vectorization report and there
+           are some very special flags that will tell you if you are doing your vectorization
+           correctly. You have to make sure that you are aligned properly in memory and that
+           your kernel's computations can be easily vectorized.
+
+3. All in all, good work!
